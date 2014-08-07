@@ -1,44 +1,33 @@
+# Constants
+AGI_SKILLS = ('Archery','Automatics','Blades','Clubs','Exotic Ranged Weapon',
+              'Heavy Weapons','Long Arms','Pistols','Throwing Weapons','Unarmed Combat',
+              'Gunnery','Gymnastics','Escape Artist','Exotic Melee Weapon','Locksmith',
+              'Palming','Sneaking',)
+BOD_SKILLS = ('Diving','Freefall')
+REA_SKILLS = ('Pilot Aerospace','Pilot Aircraft','Pilot Walker','Pilot Exotic Vehicle',
+              'Pilot Ground Craft','Pilot Water Craft')
+STR_SKILLS = ('Running','Swimming')
+CHR_SKILLS = ('Con','Etiquette','Instruction','Intimidation','Leadership','Negotiation',
+              'Performance','Impersonation','Animal Handling')
+INT_SKILLS = ('Artisan','Assensing','Disguise','Navigation','Perception','Tracking')
+LOG_SKILLS = ('Aeronautics Mechanics','Arcane','Armorer','Automotive Mechanic',
+              'Biotechnology','Chemistry','Computer','Cybertechnology','Cybercombat',
+              'Demolitions','Electronic Warfare','First Aid','Industrial Mechanics',
+              'Hacking','Hardware','Medicine','Nautical Mechanics','Software','Forgery')
+
 def Engineer_Master_Skill_Dictionary():
     """
     Returns a dictionary of every skill in SR5.
     Skill_Name : [Rating, Specification, Attribute]
     """
     skill_list = {}
-    # AGI Skills
-    for skill_name in ['Archery','Automatics','Blades','Clubs','Exotic Ranged Weapon',
-                       'Heavy Weapons','Long Arms','Pistols','Throwing Weapons',
-                       'Unarmed Combat','Gunnery','Gymnastics','Escape Artist',
-                       'Exotic Melee Weapon','Locksmith','Palming','Sneaking',]:
-        skill_list[skill_name] = [0,None,'AGI']
-    # BOD Skills
-    for skill_name in ['Diving','Freefall']:
-        skill_list[skill_name] = [0,None,'BOD']
-    # REA Skills
-    for skill_name in ['Pilot Aerospace','Pilot Aircraft','Pilot Walker',
-                       'Pilot Exotic Vehicle','Pilot Ground Craft','Pilot Water Craft']:
-        skill_list[skill_name] = [0,None,'REA']
-    # STR Skills
-    for skill_name in ['Running','Swimming']:
-        skill_list[skill_name] = [0,None,'STR']
-    # CHR Skills
-    for skill_name in ['Con','Etiquette','Instruction','Intimidation','Leadership',
-                       'Negotiation','Performance','Impersonation','Animal Handling']:
-        skill_list[skill_name] = [0,None,'CHR']
-    # INT Skills
-    for skill_name in ['Artisan','Assensing','Disguise','Navigation','Perception',
-                       'Tracking']:
-        skill_list[skill_name] = [0,None,'INT']
-    # LOG Skills
-    for skill_name in ['Aeronautics Mechanics','Arcane','Armorer','Automotive Mechanic',
-                       'Biotechnology','Chemistry','Computer','Cybertechnology',
-                       'Cybercombat','Demolitions','Electronic Warfare','First Aid',
-                       'Industrial Mechanics','Hacking','Hardware','Medicine',
-                       'Nautical Mechanics','Software','Forgery']:
-        skill_list[skill_name] = [0,None,'LOG']
-    # WIL Skills
-    for skill_name in ['Astral Combat','Survival']:
-        skill_list[skill_name] = [0,None,'WIL']
-    # All done!
+    for skill_name in AGI_SKILLS:    skill_list[skill_name] = [0,None,'AGI']
+    for skill_name in BOD_SKILLS:    skill_list[skill_name] = [0,None,'BOD']
+    for skill_name in REA_SKILLS:    skill_list[skill_name] = [0,None,'REA']
+    for skill_name in STR_SKILLS:    skill_list[skill_name] = [0,None,'STR']
+    for skill_name in CHR_SKILLS:    skill_list[skill_name] = [0,None,'CHR']
+    for skill_name in INT_SKILLS:    skill_list[skill_name] = [0,None,'INT']
+    for skill_name in LOG_SKILLS:    skill_list[skill_name] = [0,None,'LOG']
     return skill_list
 
 class Hero(object):
@@ -59,7 +48,7 @@ class Hero(object):
 
     def Print_Skills(self):
         for skill in self.Skills:
-            print skill+": "+str(self.Skills[skill][0])
+            print skill+": "+str(self.Skills[skill][0])+'\t',
 
     def Reset_Skills(self):
         for skill in self.Skills:
