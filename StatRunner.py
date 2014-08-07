@@ -46,6 +46,21 @@ class Hero(object):
         self.Race = Race
         self.Skills = Engineer_Master_Skill_Dictionary()
 
+    def Set_Skill(self,skill_name,new_value):
+        # Let's make sure we don't implode our hero...
+        if type(skill_name) != str:
+            raise TypeError("skill_name "+str(skill_name)+" is not a string.")
+        elif type(new_value) != int:
+            raise TypeError("new_value "+str(new_value)+" is not an integer.")
+        elif (new_value < 0) or (new_value > 6):
+            raise ValueError("new_value "+str(new_value)+" is not between 0 and 6.")
+        elif skill_name not in self.Skills:
+            raise KeyError("Cannot set nonexistant "+skill_name+" skill to "+\
+                           str(new_value)+" for "+self.Name+".")
+        # So if nothing goes wrong,
+        else:
+            self.Skills[skill_name][0] = new_value
+
     def Print_Skills(self):
         for skill in self.Skills:
             print skill+": "+str(self.Skills[skill][0])+'\t',
