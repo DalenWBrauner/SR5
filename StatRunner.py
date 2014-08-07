@@ -41,7 +41,8 @@ def Engineer_Master_Skill_Dictionary():
 ### Hero Object
 class Hero(object):
 
-    def __init__(self,Name="Nameless",Race='Human',Attributes=(1,1,1,1,1,1,1,1,1,0)):
+    def __init__(self,Name="Nameless",Race='Human',Attributes=(1,1,1,1,1,1,1,1,1,0),\
+                 Qualities=(),Knowledge_Skills=(),Inventory=""):
         """
         'Name':         Name of our Hero
         'Attributes':   BOD, AGI, REA, STR, WIL, LOG, INT, CHR, EDG in that order.
@@ -53,6 +54,7 @@ class Hero(object):
             raise IndexError("You provided "+str(len(Attributes))+" attributes; "+\
                              "need precisely 9.")
         self.Name = Name
+        self.Race = Race
         self.ATT = {}
         self.ATT['BOD'] = Attributes[0]
         self.ATT['AGI'] = Attributes[1]
@@ -64,8 +66,10 @@ class Hero(object):
         self.ATT['CHR'] = Attributes[7]
         self.ATT['EDG'] = Attributes[8]
         self.ATT['MAG'] = Attributes[9]
-        self.Race = Race
+        self.Qualities = Qualities
         self.Skills = Engineer_Master_Skill_Dictionary()
+        self.Knowledge_Skills = Knowledge_Skills
+        self.Inventory = Inventory
 
     def Set_Skill(self,skill_name,new_value):
         # Check skill_name is appropriate
