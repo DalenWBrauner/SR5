@@ -41,7 +41,7 @@ def Engineer_Master_Skill_Dictionary():
 ### Hero Object
 class Hero(object):
 
-    def __init__(self,Name="Nameless",Attributes=(1,1,1,1,1,1,1,1,1),Race='Human'):
+    def __init__(self,Name="Nameless",Race='Human',Attributes=(1,1,1,1,1,1,1,1,1,0)):
         """
         'Name':         Name of our Hero
         'Attributes':   BOD, AGI, REA, STR, WIL, LOG, INT, CHR, EDG in that order.
@@ -63,6 +63,7 @@ class Hero(object):
         self.ATT['INT'] = Attributes[6]
         self.ATT['CHR'] = Attributes[7]
         self.ATT['EDG'] = Attributes[8]
+        self.ATT['MAG'] = Attributes[9]
         self.Race = Race
         self.Skills = Engineer_Master_Skill_Dictionary()
 
