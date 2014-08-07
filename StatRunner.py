@@ -47,6 +47,11 @@ class Hero(object):
         'Attributes':   BOD, AGI, REA, STR, WIL, LOG, INT, CHR, EDG in that order.
         'Race':         Race of our Hero
         """
+        if type(Name) != str:
+            raise TypeError("Your name has to be a string! "+str(Name)+" was not!")
+        elif len(Attributes) != 9:
+            raise IndexError("You provided "+str(len(Attributes))+" attributes; "+\
+                             "need precisely 9.")
         self.Name = Name
         self.ATT = {}
         self.ATT['BOD'] = Attributes[0]
@@ -62,16 +67,18 @@ class Hero(object):
         self.Skills = Engineer_Master_Skill_Dictionary()
 
     def Set_Skill(self,skill_name,new_value):
-        # Let's make sure we don't implode our hero...
+        # Check skill_name is appropriate
         if type(skill_name) != str:
             raise TypeError("skill_name "+str(skill_name)+" is not a string.")
+        elif skill_name not in self.Skills:
+            raise KeyError("Cannot set nonexistant "+skill_name+" skill to "+\
+                           str(new_value)+" for "+self.Name+".")
+        # Check new_value is appropriate
         elif type(new_value) != int:
             raise TypeError("new_value "+str(new_value)+" is not an integer.")
         elif (new_value < 0) or (new_value > 6):
             raise ValueError("new_value "+str(new_value)+" is not between 0 and 6.")
-        elif skill_name not in self.Skills:
-            raise KeyError("Cannot set nonexistant "+skill_name+" skill to "+\
-                           str(new_value)+" for "+self.Name+".")
+        
         
         # So if nothing goes wrong,
         else:
@@ -86,39 +93,58 @@ class Hero(object):
             self.Skills[skill][0] = 0
             self.Skills[skill][1] = None
 
-    def Skill_Check(self,skill_name,hits_needed):
-        # Let's make sure we don't implode our hero...
+    def Skill_Check(self,skill_name,hits_needed,modifier=0,en_masse=False):
+        # Check skill_name is appropriate
         if type(skill_name) != str:
             raise TypeError("skill_name "+str(skill_name)+" is not a string.")
+        elif skill_name not in self.Skills:
+            raise KeyError("Cannot check nonexistant "+skill_name+" skill with "+\
+                           str(hits_needed)+" hits for "+self.Name+".")
+        # Check hits_needed is appropriate
         elif type(hits_needed) != int:
             raise TypeError("hits_needed "+str(hits_needed)+" is not an integer.")
         elif hits_needed < 1:
             raise ValueError("hits_needed "+str(hits_needed)+" is not at least 1.")
-        elif skill_name not in self.Skills:
-            raise KeyError("Cannot check nonexistant "+skill_name+" skill with "+\
-                           str(hits_needed)+" hits for "+self.Name+".")
+        # Check modifier is appropriate
+        elif type(modifier) != int:
+            raise TypeError("modifier "+str(modifier)+" is not an integer.")
 
         # So if nothing goes wrong,
         else:
             Skill_Level, blarb, Which_Attribute = self.Skills[skill_name]
-            Check(hits_needed, (Skill_Level + self.ATT[Which_Attribute]))
+            dice_rolled = Skill_Level + self.ATT[Which_Attribute] + modifier
+            if not en_masse:
+                print "With a",Skill_Level,"in",skill_name,"+",self.ATT[Which_Attribute],\
+                      "in",Which_Attribute,"and a",modifier,"modifier..."
+                Check(hits_needed, dice_rolled)
+            else:
+                for x in xrange(10):
+                    Check(hits_needed, dice_rolled, False)
             
 
 #
 ##
 ### Chance
-def Check(hits_needed,dice_rolled):
+def Check(hits_needed,dice_rolled,wordy=True):
     """
     Rolls the dice!
     Informs you if you've passed your check or not.
     """
+    if dice_rolled < 1:
+        print "Immediate failure; rolling no dice!"
+        return
     hits = 0
     misses = 0
     for dice in xrange(dice_rolled):
         result = randint(1,6)
         if result > 4:  hits +=1
         if result == 1: misses += 1
-        print result,
-    if hits >= hits_needed:     print "\nSuccess",
-    else:                       print "\nFailure",
-    print "with",misses,"misses."
+        if wordy:       print result,
+    if wordy:
+        if hits >= hits_needed:     print "\nSuccess",
+        else:                       print "\nFailure",
+        print "with",misses,"misses."
+    else:
+        if hits >= hits_needed:     print True,
+        else:                       print False,
+        print misses
