@@ -1,17 +1,3 @@
-class Skill(object):
-    
-    def __init__(self,Name,Attribute):
-        self.Name = Name
-        self.Attribute = Attribute
-        self.Rating = 0
-        self.Specification = None
-
-    def __str__(self):
-        if self.Specification == None:
-            return self.Name + ": " + str(self.Rating)
-        else:
-            return self.Name + ": " + str(self.Rating) + ", " + self.Specification
-
 def Engineer_Master_Skill_Dictionary():
     """
     Returns a dictionary of every skill in SR5.
