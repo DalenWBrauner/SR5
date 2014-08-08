@@ -3,21 +3,24 @@ from random import randint
 #
 ##
 ### Constants
+BOD_SKILLS = ('Diving','Freefall')
 AGI_SKILLS = ('Archery','Automatics','Blades','Clubs','Exotic Ranged Weapon',
               'Heavy Weapons','Long Arms','Pistols','Throwing Weapons','Unarmed Combat',
               'Gunnery','Gymnastics','Escape Artist','Exotic Melee Weapon','Locksmith',
               'Palming','Sneaking',)
-BOD_SKILLS = ('Diving','Freefall')
 REA_SKILLS = ('Pilot Aerospace','Pilot Aircraft','Pilot Walker','Pilot Exotic Vehicle',
               'Pilot Ground Craft','Pilot Water Craft')
 STR_SKILLS = ('Running','Swimming')
-CHR_SKILLS = ('Con','Etiquette','Instruction','Intimidation','Leadership','Negotiation',
-              'Performance','Impersonation','Animal Handling')
+WIL_SKILLS = ('Astral Combat','Survival')
 INT_SKILLS = ('Artisan','Assensing','Disguise','Navigation','Perception','Tracking')
 LOG_SKILLS = ('Aeronautics Mechanics','Arcane','Armorer','Automotive Mechanic',
               'Biotechnology','Chemistry','Computer','Cybertechnology','Cybercombat',
               'Demolitions','Electronic Warfare','First Aid','Industrial Mechanics',
               'Hacking','Hardware','Medicine','Nautical Mechanics','Software','Forgery')
+CHR_SKILLS = ('Con','Etiquette','Instruction','Intimidation','Leadership','Negotiation',
+              'Performance','Impersonation','Animal Handling')
+MAG_SKILLS = ('Alchemy','Artificing','Banishing','Binding','Counterspelling',
+              'Ritual Spellcasting','Spellcasting','Summoning','Disenchanting')
 #
 ##
 ### Utility
@@ -27,13 +30,15 @@ def Engineer_Master_Skill_Dictionary():
     Skill_Name : [Rating, Specification, Attribute]
     """
     skill_list = {}
-    for skill_name in AGI_SKILLS:    skill_list[skill_name] = [0,None,'AGI']
     for skill_name in BOD_SKILLS:    skill_list[skill_name] = [0,None,'BOD']
+    for skill_name in AGI_SKILLS:    skill_list[skill_name] = [0,None,'AGI']
     for skill_name in REA_SKILLS:    skill_list[skill_name] = [0,None,'REA']
     for skill_name in STR_SKILLS:    skill_list[skill_name] = [0,None,'STR']
-    for skill_name in CHR_SKILLS:    skill_list[skill_name] = [0,None,'CHR']
+    for skill_name in WIL_SKILLS:    skill_list[skill_name] = [0,None,'WIL']
     for skill_name in INT_SKILLS:    skill_list[skill_name] = [0,None,'INT']
     for skill_name in LOG_SKILLS:    skill_list[skill_name] = [0,None,'LOG']
+    for skill_name in CHR_SKILLS:    skill_list[skill_name] = [0,None,'CHR']
+    for skill_name in MAG_SKILLS:    skill_list[skill_name] = [0,None,'MAG']
     return skill_list
 
 #
